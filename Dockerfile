@@ -8,9 +8,7 @@ RUN apt update && apt install -y \
     ros-humble-navigation2 \
     ros-humble-nav2-bringup \
     ros-humble-turtlebot3-gazebo && \
-    rm -rf /var/lib/apt/lists/* && \
-    source /opt/ros/humble/setup.bash && \
-    ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+    rm -rf /var/lib/apt/lists/*
 
 RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
 
