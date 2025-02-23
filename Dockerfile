@@ -16,7 +16,7 @@ RUN apt update && apt install -y \
     ros-humble-turtlebot3-gazebo && \
     rm -rf /var/lib/apt/lists/*
 
-RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
+RUN echo "source /opt/ros/humble/setup.bash" >> /home/user/.bashrc
 
 WORKDIR /workspace
 
