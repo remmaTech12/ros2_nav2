@@ -2,9 +2,14 @@ version: '3.9'
 
 services:
   ros2_nav2:
-    build: .
+    build:
+      context: .
+      args:
+        UID: "${UID}"
+        GID: "${GID}"
     container_name: ros2_nav2
     network_mode: "host"
+    user: "${UID}:${GID}"
     environment:
       - DISPLAY=${DISPLAY}
       - QT_X11_NO_MITSHM=1
