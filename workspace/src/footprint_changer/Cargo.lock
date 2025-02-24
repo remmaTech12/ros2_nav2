@@ -614,10 +614,6 @@ name = "stereo_msgs"
 version = "4.2.4"
 
 [[patch.unused]]
-name = "string_length_node"
-version = "0.1.0"
-
-[[patch.unused]]
 name = "test_msgs"
 version = "1.2.1"
 
