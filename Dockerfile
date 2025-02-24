@@ -20,4 +20,7 @@ RUN echo "source /opt/ros/humble/setup.bash" >> /home/user/.bashrc
 
 WORKDIR /workspace
 
+ENV TURTLEBOT3_MODEL=waffle
+ENV GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models
+
 CMD ["bash"]
