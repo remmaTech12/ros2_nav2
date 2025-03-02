@@ -7,7 +7,7 @@ image = Image.open(input_file).convert("L")
 image = np.array(image, dtype=np.uint8)
 
 resolution = 0.05  # [m/px]: x [m/px] means x meter for 1 px.
-height, width = image.shape
+width, height = image.shape
 
 # Header part of .world file
 world_template_list = ["""<?xml version="1.0" ?>
@@ -32,22 +32,22 @@ world_template_list = ["""<?xml version="1.0" ?>
 wall_height = 1.0
 
 # Convert a consecutive lateral line to a wall
-for y in range(height):
-    x = 0
-    while x < width:
+for x in range(width):
+    y = 0
+    while y < height:
         black_threshold = 128
-        if image[y, x] < black_threshold:  # Judge black parts
-            start_x = x
+        if image[x, y] < black_threshold:  # Judge black parts
+            start_y = y
             # Search for consecutive black parts
-            while x < width and image[y, x] < black_threshold: 
-                x += 1
-            end_x = x
+            while y < height and image[x, y] < black_threshold:
+                y += 1
+            end_y = y
 
-            wall_x = ((start_x + end_x - 1) / 2 - width / 2) * resolution
-            wall_y = (height / 2 - y) * resolution
-            wall_length = (end_x - start_x) * resolution
+            wall_x = ((start_y + end_y - 1) / 2 - height / 2) * resolution
+            wall_y = (width / 2 - x) * resolution
+            wall_length = (end_y - start_y) * resolution
             world_template_list.append(f"""
-    <model name="wall_{start_x}_{y}">
+    <model name="wall_{start_y}_{x}">
       <static>true</static>
       <pose>{wall_x} {wall_y} {wall_height/2} 0 0 0</pose>
       <link name="link">
@@ -68,7 +68,7 @@ for y in range(height):
       </link>
     </model>
 """)
-        x += 1
+        y += 1
 
 # Footer part of .world file
 world_template_list.append("""
